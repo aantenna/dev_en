@@ -83,18 +83,17 @@
                 <div class="dropdown mb-2">
                     <button class="btn btn-secondary dropdown-toggle btn-dark" type="button" data-bs-toggle="dropdown"
                         aria-expanded="false">
-                        Каталог
+                        Категории
                         <img class="mx-1" src="{% static 'deps/icons/grid-fill.svg' %}" alt="Catalog Icon" width="16"
                             height="16">
                     </button>
                     <ul class="dropdown-menu bg-dark" data-bs-theme="dark">
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Все товары</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Кухня</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Спальня</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Гостинная</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Офис</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Фурнитура</a></li>
-                        <li><a class="dropdown-item text-white" href="goods/catalog.html">Декор</a></li>
+                        <li><a class="dropdown-item text-white" href="{% url 'сategories:index' %}">Все</a></li>
+                        <li><a class="dropdown-item text-white" href="{% url 'сategories:index' %}">Жанры</a></li>
+                        <li><a class="dropdown-item text-white" href="{% url 'сategories:index' %}">Исполнители</a></li>
+                        <li><a class="dropdown-item text-white" href="{% url 'сategories:index' %}">Популярные альбомы</a></li>
+                        <li><a class="dropdown-item text-white" href="{% url 'сategories:index' %}">Чарты</a></li>
+                        <li><a class="dropdown-item text-white" href="{% url 'сategories:index' %}">Рекомендации</a></li>
                     </ul>
                 </div>
                 <!-- Значек корзины, вызывает модальное окно -->
