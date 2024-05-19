@@ -17,9 +17,15 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+from appmuspl.settings import DEBUG
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('main.urls', namespace='main')),
-    path('сategories/', include('tracks.urls', namespace='сategories'))
+    path('сategories/', include('tracks.urls', namespace='сategories')),
 ]
+
+if DEBUG:
+    urlpatterns += [
+        path("__debug__/", include("debug_toolbar.urls")),
+    ]
