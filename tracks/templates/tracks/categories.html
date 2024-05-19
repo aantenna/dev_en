@@ -55,7 +55,7 @@
                     <img src="{% static 'deps/images/Not image.jpg' %}" class="card-img-top" alt="...">
                 {% endif %}
                 <div class="card-body">
-                    <a href="../tracks/track.html">
+                    <a href="{% url 'сategories:track' track.slug %}">
                         <p class="card-title">{{ track.title }}</p>
                     </a>
                     <p class="card-text text-truncate">{{ track.artist }}</p>

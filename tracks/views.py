@@ -12,5 +12,12 @@ def сategories(request):
     return render(request, 'tracks/categories.html', context)
 
 
-def track(request):
-    return render(request, 'tracks/track.html')
+def track(request, track_slug):
+
+    track = Tracks.objects.get(slug=track_slug)
+
+    context = {
+        'track': track
+    }
+
+    return render(request, 'tracks/track.html', context=context)
