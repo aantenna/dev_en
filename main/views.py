@@ -1,11 +1,17 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+from tracks.models import Categories
+
 
 def index(request):
+
+    categories = Categories.objects.all()
+
     context = {
         'title': 'Home - Главная',
-        'content': "Создай свой первый плейлист и начни слушать музыку!"
+        'content': "Создай свой первый плейлист и начни слушать музыку!",
+        'categories': categories
 
     }
     return render(request, 'main/index.html', context)
