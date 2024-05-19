@@ -11,7 +11,6 @@ def index(request):
     context = {
         'title': 'Home - Главная',
         'content': "Создай свой первый плейлист и начни слушать музыку!",
-        'categories': categories
 
     }
     return render(request, 'main/index.html', context)
