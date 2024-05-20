@@ -12,8 +12,11 @@
             Фильтры
         </button>
 
-        <form action="{% url 'tracks:index' slug_url %}" method="get" class="dropdown-menu bg-dark" data-bs-theme="dark">
-            <!-- <input type="hidden" name="q" value="request.GET.q"> -->
+        <form action="{% if request.GET.q %}{% url 'сategories:search' %}{% else %}{% url 'tracks:index' slug_url %}{% endif %}" method="get" class="dropdown-menu bg-dark" data-bs-theme="dark">
+
+            {% if request.GET.q %}
+            <input type="hidden" name="q" value="{{ request.GET.q }}">
+            {% endif %}
             <p class="text-white mx-3 mt-3">Сортировать:</p>
             <div class="form-check text-white mx-3">
                 <input class="form-check-input" type="radio" name="order_by" id="flexRadioDefault1" value="default"
@@ -47,18 +50,17 @@
         <div class="p-2">
             <div class="card-horizontal card rounded">
                 {% if track.image %}
-                    <img src="{{ track.image.url }}" class="card-img-top" alt="{{ track.title }}">
+                <img src="{{ track.image.url }}" class="card-img-top" alt="{{ track.title }}">
                 {% else %}
-                    <img src="{% static 'deps/images/Not image.jpg' %}" class="card-img-top" alt="...">
+                <img src="{% static 'deps/images/Not image.jpg' %}" class="card-img-top" alt="...">
                 {% endif %}
                 <div class="card-body">
                     <a href="{% url 'сategories:track' track.slug %}">
                         <p class="card-title">{{ track.title }}</p>
                     </a>
                     <p class="card-text text-truncate">{{ track.artist }}</p>
-<!--                    <p class="product_id">id: 02265</p>-->
+                    <!--                    <p class="product_id">id: 02265</p>-->
                     <div class="d-flex justify-content-between">
-
 
 
                         <!--                    <p><s>100</s> $</p>-->
@@ -83,19 +85,21 @@
     <ul class="pagination justify-content-center my-4">
         <div class="custom-shadow d-flex">
             <li class="page-item {% if not tracks.has_previous %}disabled{% endif %}">
-                <a class="page-link" href="{% if tracks.has_previous %}?{% change_params page=tracks.previous_page_number %}{% else %}#{% endif %}">Назад</a>
+                <a class="page-link"
+                   href="{% if tracks.has_previous %}?{% change_params page=tracks.previous_page_number %}{% else %}#{% endif %}">Назад</a>
             </li>
 
             {% for page in tracks.paginator.page_range %}
             {% if page >= tracks.number|add:-2 and page <= tracks.number|add:2 %}
-                <li class="page-item {% if tracks.number == page %}active{% endif %}">
-                    <a class="page-link" href="?{% change_params page=page %}">{{ page }}</a>
-                </li>
+            <li class="page-item {% if tracks.number == page %}active{% endif %}">
+                <a class="page-link" href="?{% change_params page=page %}">{{ page }}</a>
+            </li>
             {% endif %}
             {% endfor %}
 
             <li class="page-item {% if not tracks.has_next %}disabled{% endif %}">
-                <a class="page-link" href="{% if tracks.has_next %}?{% change_params page=tracks.next_page_number %}{% else %}#{% endif %}">Следующая</a>
+                <a class="page-link"
+                   href="{% if tracks.has_next %}?{% change_params page=tracks.next_page_number %}{% else %}#{% endif %}">Следующая</a>
             </li>
         </div>
     </ul>

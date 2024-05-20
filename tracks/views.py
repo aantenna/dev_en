@@ -1,15 +1,19 @@
 from django.shortcuts import render, get_list_or_404
 from django.core.paginator import Paginator
 from tracks.models import Tracks
+from tracks.utils import q_search
 
 
-def сategories(request, category_slug):
+def сategories(request, category_slug=None):
 
     page = request.GET.get('page', 1)
     order_by = request.GET.get('order_by', None)
+    query = request.GET.get('q', None)
 
     if category_slug == 'all':
         tracks = Tracks.objects.all()  # помещаем QuerySet - набор из базы данных
+    elif query:
+        tracks = q_search(query)
     else:
         tracks = get_list_or_404(Tracks.objects.filter(categories__slug=category_slug))
 

@@ -11,7 +11,7 @@
     "model": "tracks.categories",
     "pk": 3,
     "fields": {
-      "name": "Популярные испольнители",
+      "name": "Популярные исполнители",
       "slug": "popular-artists"
     }
   },
@@ -27,7 +27,7 @@
     "model": "tracks.categories",
     "pk": 5,
     "fields": {
-      "name": "Набирает популярность",
+      "name": "Популярное",
       "slug": "popular"
     }
   },
