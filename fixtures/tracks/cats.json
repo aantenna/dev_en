@@ -1,0 +1,50 @@
+[
+  {
+    "model": "tracks.categories",
+    "pk": 2,
+    "fields": {
+      "name": "Все",
+      "slug": "all"
+    }
+  },
+  {
+    "model": "tracks.categories",
+    "pk": 3,
+    "fields": {
+      "name": "Популярные испольнители",
+      "slug": "popular-artists"
+    }
+  },
+  {
+    "model": "tracks.categories",
+    "pk": 4,
+    "fields": {
+      "name": "Популярные альбомы",
+      "slug": "popular-albums"
+    }
+  },
+  {
+    "model": "tracks.categories",
+    "pk": 5,
+    "fields": {
+      "name": "Набирает популярность",
+      "slug": "popular"
+    }
+  },
+  {
+    "model": "tracks.categories",
+    "pk": 6,
+    "fields": {
+      "name": "Чарты",
+      "slug": "charts"
+    }
+  },
+  {
+    "model": "tracks.categories",
+    "pk": 7,
+    "fields": {
+      "name": "Рекомендации",
+      "slug": "rekomendacii"
+    }
+  }
+]

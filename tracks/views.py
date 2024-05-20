@@ -6,11 +6,16 @@ from tracks.models import Tracks
 def сategories(request, category_slug):
 
     page = request.GET.get('page', 1)
+    order_by = request.GET.get('order_by', None)
 
     if category_slug == 'all':
         tracks = Tracks.objects.all()  # помещаем QuerySet - набор из базы данных
     else:
         tracks = get_list_or_404(Tracks.objects.filter(categories__slug=category_slug))
+
+
+    if order_by and order_by != 'default':
+        tracks = tracks.order_by(order_by)
 
     paginator = Paginator(tracks, 4)
     current_page = paginator.page(int(page))
