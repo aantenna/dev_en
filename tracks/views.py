@@ -1,9 +1,14 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_list_or_404
 from tracks.models import Tracks
 
-def сategories(request):
+def сategories(request, category_slug):
 
-    tracks = Tracks.objects.all() # помещаем QuerySet - набор из базы данных
+    if category_slug == 'all':
+        tracks = Tracks.objects.all()  # помещаем QuerySet - набор из базы данных
+    else:
+        tracks = get_list_or_404(Tracks.objects.filter(categories__slug=category_slug))
+
+
 
     context = {
         'title': 'Home - Категории',

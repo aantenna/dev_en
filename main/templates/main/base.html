@@ -26,7 +26,7 @@
 <header>
     <nav class="navbar navbar-expand-lg bg-dark" data-bs-theme="dark">
         <div class="container">
-            <a class="navbar-brand" href="{% url 'main:index' %}">Home</a>
+            <a class="navbar-brand" href="{% url 'main:index' %}">Главная</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -92,7 +92,7 @@
                 <ul class="dropdown-menu bg-dark" data-bs-theme="dark">
                     {% tag_categories as categories %}
                     {% for category in categories %}
-                    <li><a class="dropdown-item text-white" href="{% url 'сategories:index' %}">{{category.name}}</a></li>
+                    <li><a class="dropdown-item text-white" href="{% url 'сategories:index' category.slug %}">{{category.name}}</a></li>
                     {% endfor %}
                 </ul>
             </div>
