@@ -17,22 +17,21 @@ def q_search(query):
     vector = SearchVector("title") # , "artist"
     query = SearchQuery(query)
 
-    return Tracks.objects.annotate(rank=SearchRank(vector, query)).order_by("-rank")
-    #
-    # result = (
-    #     Tracks.objects.annotate(rank=SearchRank(vector, query))
-    #     .filter(rank__gt=0)
-    #     .order_by("-rank")
-    # )
-    #
-    # result = result.annotate(
-    #     headline=SearchHeadline(
-    #         "name",
-    #         query,
-    #         start_sel='<span style="background-color: yellow;">',
-    #         stop_sel="</span>",
-    #     )
-    # )
+    result = (
+        Tracks.objects.annotate(rank=SearchRank(vector, query))
+        .filter(rank__gt=0)
+        .order_by("-rank")
+    )
+
+    result = result.annotate(
+        headline=SearchHeadline(
+            "title",
+            query,
+            start_sel='<span style="background-color: yellow;">',
+            stop_sel="</span>",
+        )
+    )
+
     # result = result.annotate(
     #     bodyline=SearchHeadline(
     #         "description",
@@ -41,7 +40,7 @@ def q_search(query):
     #         stop_sel="</span>",
     #     )
     # )
-    # return result
+    return result
 
 
     # keywords = [word for word in query.split() if len(word) > 2]
