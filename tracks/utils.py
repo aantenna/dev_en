@@ -8,23 +8,16 @@ from django.contrib.postgres.search import (
 
 from tracks.models import Tracks
 
+# Полнотекстовый поиск
 def q_search(query):
 
     if query.isdigit() and len(query) <= 5:
         return Tracks.objects.filter(id=int(query))
 
-    keywords = [word for word in query.split() if len(word) > 2]
+    vector = SearchVector("title") # , "artist"
+    query = SearchQuery(query)
 
-    q_objects = Q()
-
-    for token in keywords:
-        q_objects |= Q(rating__icontains=token)
-        q_objects |= Q(title__icontains=token)
-
-    return Tracks.objects.filter(q_objects)
-
-    # vector = SearchVector("title") # , "artist"
-    # query = SearchQuery(query)
+    return Tracks.objects.annotate(rank=SearchRank(vector, query)).order_by("-rank")
     #
     # result = (
     #     Tracks.objects.annotate(rank=SearchRank(vector, query))
@@ -49,6 +42,8 @@ def q_search(query):
     #     )
     # )
     # return result
+
+
     # keywords = [word for word in query.split() if len(word) > 2]
 
     # q_objects = Q()
