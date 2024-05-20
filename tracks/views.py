@@ -3,7 +3,9 @@ from django.core.paginator import Paginator
 from tracks.models import Tracks
 
 
-def сategories(request, category_slug, page=1):
+def сategories(request, category_slug):
+
+    page = request.GET.get('page', 1)
 
     if category_slug == 'all':
         tracks = Tracks.objects.all()  # помещаем QuerySet - набор из базы данных
@@ -11,7 +13,7 @@ def сategories(request, category_slug, page=1):
         tracks = get_list_or_404(Tracks.objects.filter(categories__slug=category_slug))
 
     paginator = Paginator(tracks, 4)
-    current_page = paginator.page(page)
+    current_page = paginator.page(int(page))
 
 
 
