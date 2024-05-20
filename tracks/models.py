@@ -33,5 +33,6 @@ class Tracks(models.Model):
         db_table = 'track'
         verbose_name = 'Трек'
         verbose_name_plural = 'Треки'
+        ordering = ("id", )
 
 
