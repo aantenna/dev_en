@@ -12,7 +12,8 @@
             Фильтры
         </button>
 
-        <form action="{% if request.GET.q %}{% url 'сategories:search' %}{% else %}{% url 'tracks:index' slug_url %}{% endif %}" method="get" class="dropdown-menu bg-dark" data-bs-theme="dark">
+        <form action="{% if request.GET.q %}{% url 'сategories:search' %}{% else %}{% url 'tracks:index' slug_url %}{% endif %}"
+              method="get" class="dropdown-menu bg-dark" data-bs-theme="dark">
 
             {% if request.GET.q %}
             <input type="hidden" name="q" value="{{ request.GET.q }}">
@@ -47,8 +48,8 @@
     {% if request.GET.q %}
     <h3 class="mt-4">Результаты поиска по запросу {{ request.GET.q }}</h3>
     {% if not tracks %}
-        <link rel="stylesheet" href="{% static 'deps/css/my_footer_css.css' %}">
-        <h2 class="mt-4">По запросу ничего не найдено</h2>
+    <link rel="stylesheet" href="{% static 'deps/css/my_footer_css.css' %}">
+    <h2 class="mt-4">По запросу ничего не найдено</h2>
     {% endif %}
     {% endif %}
 
@@ -62,25 +63,32 @@
                 {% else %}
                 <img src="{% static 'deps/images/Not image.jpg' %}" class="card-img-top" alt="...">
                 {% endif %}
+
+                {% if track.audio_file %}
+                <audio controls>
+                    <source src="{{ track.audio_file.url }}" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                {% else %}
+                <p>No audio file available.</p>
+                {% endif %}
                 <div class="card-body">
                     <a href="{% url 'сategories:track' track.slug %}">
                         <p class="card-title">
                             {% autoescape off %}
-                                {% if track.headline %}
-                                {{ track.headline }}
-                                {% else %}
-                                {{ track.title }}
-                                {% endif %}
+                            {% if track.headline %}
+                            {{ track.headline }}
+                            {% else %}
+                            {{ track.title }}
+                            {% endif %}
                             {% endautoescape %}
 
                         </p>
                     </a>
                     <p class="card-text text-truncate">{{ track.artist }}</p>
+                    <p class="card-text">Жанр: <strong>{{ track.genre }}</strong></p>
                     <!--                    <p class="product_id">id: 02265</p>-->
                     <div class="d-flex justify-content-between">
-
-
-                        <!--                    <p><s>100</s> $</p>-->
                         <p>Оценка пользователей: <strong>{{ track.rating }}</strong></p>
 
 

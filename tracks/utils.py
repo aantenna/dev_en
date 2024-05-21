@@ -8,13 +8,14 @@ from django.contrib.postgres.search import (
 
 from tracks.models import Tracks
 
+
 # Полнотекстовый поиск
 def q_search(query):
 
     if query.isdigit() and len(query) <= 5:
         return Tracks.objects.filter(id=int(query))
 
-    vector = SearchVector("title") # , "artist"
+    vector = SearchVector("title", "genre__name") # , "artist"
     query = SearchQuery(query)
 
     result = (
@@ -32,6 +33,9 @@ def q_search(query):
         )
     )
 
+
+    return result
+
     # result = result.annotate(
     #     bodyline=SearchHeadline(
     #         "description",
@@ -40,7 +44,6 @@ def q_search(query):
     #         stop_sel="</span>",
     #     )
     # )
-    return result
 
 
     # keywords = [word for word in query.split() if len(word) > 2]

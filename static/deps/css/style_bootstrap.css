@@ -756,6 +756,7 @@ progress {
 }
 
 .row {
+
     --bs-gutter-x: 1.5rem;
     --bs-gutter-y: 0;
     display: flex;
@@ -1234,7 +1235,8 @@ progress {
 
     .col-md-4 {
         flex: 0 0 auto;
-        width: 33.33333333%
+        width: 300px;
+        height: 300px;
     }
 
     .col-md-5 {
@@ -4703,8 +4705,8 @@ textarea.form-control-lg {
     --bs-card-img-overlay-padding: 1rem;
     --bs-card-group-margin: 0.75rem;
     position: relative;
-    display: flex;
-    flex-direction: column;
+
+    flex-direction: row;
     min-width: 0;
     height: var(--bs-card-height);
     color: var(--bs-body-color);
@@ -4713,6 +4715,10 @@ textarea.form-control-lg {
     background-clip: border-box;
     border: var(--bs-card-border-width) solid var(--bs-card-border-color);
     border-radius: var(--bs-card-border-radius)
+}
+
+.card-my {
+    display: flex;
 }
 
 .card-horizontal {
@@ -4754,6 +4760,8 @@ textarea.form-control-lg {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: 20px;
+
 }
 
 .card-title {

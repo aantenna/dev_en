@@ -1,6 +1,7 @@
 
 from django.urls import path
 from playlists import views
+# from .views import playlist_add
 
 app_name = 'playlists'
 

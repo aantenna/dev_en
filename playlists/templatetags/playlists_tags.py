@@ -10,4 +10,4 @@ register = template.Library()
 @register.simple_tag()
 def user_playlists(request):
     if request.user.is_authenticated:
-        return Playlist.objects.filter(user=request.user)
+        return Playlist.objects.filter(user=request.user).select_related('track')

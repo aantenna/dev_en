@@ -14,18 +14,29 @@ class Categories(models.Model):
     def __str__(self):
         return self.name
 
+class Genres(models.Model):
+    name = models.CharField(max_length=150, verbose_name='Название жанра')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        db_table = 'genre'
+        verbose_name = 'Жанр'
+        verbose_name_plural = 'Жанры'
 
 class Tracks(models.Model):
     title = models.CharField(max_length=150, verbose_name='Название')
     slug = models.SlugField(max_length=200, unique=True, blank=True, null=True, verbose_name='URL')
     image = models.ImageField(upload_to='tracks_images', blank=True, null=True, verbose_name='Изображение')
-    audio_file = models.FileField(upload_to='tracks/', verbose_name='Аудиофайл', blank=True, null=True)
+    audio_file = models.FileField(upload_to='tracks_audio', verbose_name='Аудиофайл', blank=True, null=True)
     rating = models.IntegerField(
         default=0,
         validators=[MinValueValidator(0), MaxValueValidator(5)],
         verbose_name='Рейтинг трека'
     )
     categories = models.ManyToManyField(to='Categories', verbose_name='Категории')
+    genre = models.ForeignKey(to='Genres', on_delete=models.SET_NULL, null=True, blank=True, verbose_name='Жанр')
 
     def __str__(self):
         return self.title

@@ -3,7 +3,7 @@
 
 {% block content %}
 <div class="container mt-5">
-    <div class="card mb-4 custom-shadow">
+    <div class="card mb-4 custom-shadow card-my">
         <div class="row">
             <!-- Миниатюры -->
             <div class="col-md-4">
@@ -17,9 +17,7 @@
 
 
             </div>
-            <div class="col-md-4 ">
-                <!--                <p class="product_id mt-3">id: 002654</p>-->
-            </div>
+
             <!-- Увеличить изображение в модальном окне -->
             <div class="modal fade" id="imageModal1" tabindex="-1"
                  aria-labelledby="imageModal1Label" aria-hidden="true">
@@ -46,8 +44,19 @@
         <div class="card-body">
 
             <h5 class="card-title">{{ track.title }}</h5>
+            {% if track.audio_file %}
+                <audio controls>
+                    <source src="{{ track.audio_file.url }}" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+                {% else %}
+                <p>No audio file available.</p>
+                {% endif %}
             <!--            <p class="card-text">{{ track.artist }}</p>-->
+            <p class="card-text">Жанр: <strong>{{ track.genre }}</strong></p>
             <p class="card-text">Рейтинг: <strong>{{ track.rating }}</strong></p>
+
+
             <a href="{% url 'playlist:playlist_add' track.slug %}" class="btn btn-dark add-to-cart">Добавить в плейлист</a>
         </div>
     </div>

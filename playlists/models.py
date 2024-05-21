@@ -21,7 +21,6 @@ class Playlist(models.Model):
     session_key = models.CharField(max_length=32, null=True, blank=True)
     created_timestamp = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
 
-
     class Meta:
         db_table = 'playlist'
         verbose_name = "Плейлист"

@@ -15,7 +15,7 @@ class PlaylistTabAdmin(admin.TabularInline):
 @admin.register(Playlist)
 class PlaylistAdmin(admin.ModelAdmin):
     list_display = ["user", "track_display", "created_timestamp", ]
-    list_filter = ["created_timestamp", "user", "track__title", ]
+    list_filter = ["created_timestamp", "user", ]
 #
 #     def user_display(self, obj):
 #         if obj.user:
