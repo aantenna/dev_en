@@ -4,26 +4,26 @@ $(document).ready(function () {
     var successMessage = $("#jq-notification");
 
     // // Ловим собыитие клика по кнопке добавить в корзину
-    // $(document).on("click", ".add-to-cart", function (e) {
+    // $(document).on("click", ".add-to-playlist", function (e) {
     //     // Блокируем его базовое действие
     //     e.preventDefault();
-
+    //
     //     // Берем элемент счетчика в значке корзины и берем оттуда значение
-    //     var goodsInCartCount = $("#goods-in-cart-count");
-    //     var cartCount = parseInt(goodsInCartCount.text() || 0);
-
+    //     var tracksInPlaylistCount = $("#goods-in-cart-count");
+    //     var playlistCount = parseInt(tracksInPlaylistCount.text() || 0);
+    //
     //     // Получаем id товара из атрибута data-product-id
-    //     var product_id = $(this).data("product-id");
-
+    //     var track_id = $(this).data("track-id");
+    //
     //     // Из атрибута href берем ссылку на контроллер django
-    //     var add_to_cart_url = $(this).attr("href");
-
+    //     var add_to_playlist_url = $(this).attr("href");
+    //
     //     // делаем post запрос через ajax не перезагружая страницу
     //     $.ajax({
     //         type: "POST",
-    //         url: add_to_cart_url,
+    //         url: add_to_playlist_url,
     //         data: {
-    //             product_id: product_id,
+    //             product_id: track_id,
     //             csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
     //         },
     //         success: function (data) {
@@ -33,25 +33,23 @@ $(document).ready(function () {
     //             // Через 7сек убираем сообщение
     //             setTimeout(function () {
     //                 successMessage.fadeOut(400);
-    //             }, 7000);
-
+    //             }, 100);
+    //
     //             // Увеличиваем количество товаров в корзине (отрисовка в шаблоне)
-    //             cartCount++;
-    //             goodsInCartCount.text(cartCount);
-
+    //             playlistCount++;
+    //             tracksInPlaylistCount.text(playlistCount);
+    //
     //             // Меняем содержимое корзины на ответ от django (новый отрисованный фрагмент разметки корзины)
-    //             var cartItemsContainer = $("#cart-items-container");
-    //             cartItemsContainer.html(data.cart_items_html);
-
+    //             var playlistItemsContainer = $("#playlist-items-container");
+    //             playlistItemsContainer.html(data.playlist_items_html);
+    //
     //         },
-
+    //
     //         error: function (data) {
     //             console.log("Ошибка при добавлении товара в корзину");
     //         },
     //     });
     // });
-
-
 
 
     // // Ловим собыитие клика по кнопке удалить товар из корзины
@@ -67,7 +65,7 @@ $(document).ready(function () {
     //     var cart_id = $(this).data("cart-id");
     //     // Из атрибута href берем ссылку на контроллер django
     //     var remove_from_cart = $(this).attr("href");
-    
+
     //     // делаем post запрос через ajax не перезагружая страницу
     //     $.ajax({
 
@@ -103,9 +101,7 @@ $(document).ready(function () {
     // });
 
 
-
-
-    // // Теперь + - количества товара 
+    // // Теперь + - количества товара
     // // Обработчик события для уменьшения значения
     // $(document).on("click", ".decrement", function () {
     //     // Берем ссылку на контроллер django из атрибута data-cart-change-url
@@ -152,7 +148,7 @@ $(document).ready(function () {
     //             quantity: quantity,
     //             csrfmiddlewaretoken: $("[name=csrfmiddlewaretoken]").val(),
     //         },
- 
+
     //         success: function (data) {
     //              // Сообщение
     //             successMessage.html(data.message);
@@ -161,7 +157,7 @@ $(document).ready(function () {
     //             setTimeout(function () {
     //                  successMessage.fadeOut(400);
     //             }, 7000);
- 
+
     //             // Изменяем количество товаров в корзине
     //             var goodsInCartCount = $("#goods-in-cart-count");
     //             var cartCount = parseInt(goodsInCartCount.text() || 0);
@@ -178,4 +174,36 @@ $(document).ready(function () {
     //         },
     //     });
     // }
+
+    // Берем из разметки элемент по id - оповещения от django
+    var notification = $('#notification');
+    // И через 3 сек. убираем
+    if (notification.length > 0) {
+        setTimeout(function () {
+            notification.alert('close');
+        }, 1000);
+    }
+
+    // При клике по значку корзины открываем всплывающее(модальное) окно
+    $('#modalButton').click(function () {
+        $('#exampleModal').appendTo('body');
+
+        $('#exampleModal').modal('show');
+    });
+
+    // Собыите клик по кнопке закрыть окна корзины
+    $('#exampleModal .btn-close').click(function () {
+        $('#exampleModal').modal('hide');
+    });
+
+    // Обработчик события радиокнопки выбора способа доставки
+    $("input[name='requires_delivery']").change(function () {
+        var selectedValue = $(this).val();
+        // Скрываем или отображаем input ввода адреса доставки
+        if (selectedValue === "1") {
+            $("#deliveryAddressField").show();
+        } else {
+            $("#deliveryAddressField").hide();
+        }
+    });
 });
