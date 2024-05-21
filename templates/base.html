@@ -48,9 +48,11 @@
                     <li class="nav-item">
                         <a class="nav-link  text-white" href="carts/cart.html">Моя медиатека</a>
                     </li>
+                    {% if not user.is_authenticated %}
                     <li class="nav-item">
                         <a class="nav-link  text-white" href="{% url 'user:login' %}">Войти</a>
                     </li>
+                    {% else %}
                     <li class="nav-item dropdown ">
                         <a class="nav-link dropdown-toggle text-white" href="#" role="button"
                            data-bs-toggle="dropdown" aria-expanded="false">
@@ -58,16 +60,18 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li><a class="dropdown-item  text-white" href="carts/cart.html">Моя медиатека</a></li>
-                            <li><a class="dropdown-item  text-white" href="{% url 'user:profile' %}">Личный кабинет</a>
-                            </li>
-                            <li><a class="dropdown-item  text-white" href="{% url 'admin:index' %}">Админ панель</a>
-                            </li>
+                            <li><a class="dropdown-item  text-white" href="{% url 'user:profile' %}">Личный кабинет</a></li>
+                            {% if user.is_admin or user.is_staff %}
+                                <li><a class="dropdown-item  text-white" href="{% url 'admin:index' %}">Админ панель</a></li>
+                            {% endif %}
+
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
                             <li><a class="dropdown-item  text-white" href="{% url 'user:logout' %}">Выйти</a></li>
                         </ul>
                     </li>
+                    {% endif %}
                 </ul>
                 <form class="d-flex" role="search" action="{% url 'сategories:search' %}" method="get">
                     <input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search">
@@ -92,7 +96,8 @@
                 <ul class="dropdown-menu bg-dark" data-bs-theme="dark">
                     {% tag_categories as categories %}
                     {% for category in categories %}
-                    <li><a class="dropdown-item text-white" href="{% url 'сategories:index' category.slug %}">{{category.name}}</a></li>
+                    <li><a class="dropdown-item text-white" href="{% url 'сategories:index' category.slug %}">{{category.name}}</a>
+                    </li>
                     {% endfor %}
                 </ul>
             </div>
