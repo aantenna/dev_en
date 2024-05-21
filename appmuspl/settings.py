@@ -42,6 +42,7 @@ INSTALLED_APPS = [
 
     'main',
     'tracks',
+    'users',
 
 ]
 
@@ -62,7 +63,7 @@ ROOT_URLCONF = 'appmuspl.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
