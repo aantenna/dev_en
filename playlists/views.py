@@ -22,8 +22,8 @@ def playlist_add(request, track_slug):
 
     return redirect(request.META['HTTP_REFERER'])
 
-def playlist_change(request, track_slug):
-    ...
+# def playlist_change(request, track_slug):
+#     ...
 
 
 def playlist_remove(request, playlist_id):
