@@ -48,7 +48,7 @@
             <h5 class="card-title">{{ track.title }}</h5>
             <!--            <p class="card-text">{{ track.artist }}</p>-->
             <p class="card-text">Рейтинг: <strong>{{ track.rating }}</strong></p>
-            <a href="#" class="btn btn-dark add-to-cart">Добавить в корзину</a>
+            <a href="{% url 'playlist:playlist_add' track.slug %}" class="btn btn-dark add-to-cart">Добавить в плейлист</a>
         </div>
     </div>
 </div>
