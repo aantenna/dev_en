@@ -100,21 +100,21 @@ class UserRegistrationForm(UserCreationForm):
     # )
 
 
-# class ProfileForm(UserChangeForm):
-#     class Meta:
-#         model = User
-#         fields = (
-#             "image",
-#             "first_name",
-#             "last_name",
-#             "username",
-#             "email",)
-#
-#     image = forms.ImageField(required=False)
-#     first_name = forms.CharField()
-#     last_name = forms.CharField()
-#     username = forms.CharField()
-#     email = forms.CharField()
+class ProfileForm(UserChangeForm):
+    class Meta:
+        model = User
+        fields = (
+            "image",
+            "first_name",
+            "last_name",
+            "username",
+            "email",)
+
+    image = forms.ImageField(required=False)
+    first_name = forms.CharField()
+    last_name = forms.CharField()
+    username = forms.CharField()
+    email = forms.CharField()
 
     # image = forms.ImageField(
     #     widget=forms.FileInput(attrs={"class": "form-control mt-3"}), required=False
