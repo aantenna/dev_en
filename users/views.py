@@ -74,6 +74,9 @@ def profile(request):
     return render(request, 'users/profile.html', context)
 
 
+def users_playlist(request):
+    return render(request, 'users/users_playlist.html')
+
 @login_required
 def logout(request):
     messages.success(request, f"{request.user.username}, Вы вышли из аккаунта")
